@@ -1,8 +1,8 @@
 # HƯỚNG DẪN LÀM VIỆC NHÓM – RESEARCH PAPER
 
-**Đề tài:** *Design and Evaluation of an Event-Driven Microservices Architecture for a Rental Property Management System*  
-**Định dạng:** IEEE Conference, LaTeX, viết bằng tiếng Anh  
-**Nhóm viết:** Dương, Huy, Duy, Hoàng  
+**Đề tài:** *Design and Evaluation of an Event-Driven Microservices Architecture for a Rental Property Management System*
+**Định dạng:** IEEE Conference, LaTeX, viết bằng tiếng Anh
+**Nhóm viết:** Dương, Huy, Duy, Hoàng
 **Lưu ý:** Phạm Quang Long không tham gia viết bài. **Duy** tiếp nhận toàn bộ phần nghiên cứu và viết về Gateway/Kafka/DevOps do Long phát triển.
 
 ## 1. Mục tiêu của project
@@ -43,12 +43,12 @@ rental-research-paper/
 
 ## 3. Phân công chính thức
 
-| Thành viên | Chương sở hữu | Số từ mục tiêu | Trách nhiệm bổ sung |
-|---|---|---:|---|
-| **Dương** | Abstract, I. Introduction, II. Related Work | 1.700–1.900 | Tìm, kiểm chứng và chuẩn hóa nguồn học thuật; tổng hợp abstract cuối cùng |
-| **Huy** | III. System Architecture & Security | 1.700–1.900 | Sơ đồ kiến trúc, service decomposition, database ownership, security |
-| **Duy** | IV. Event-Driven Design & Infrastructure | 1.400–1.600 | Toàn bộ phần viết Gateway/Kafka/DevOps của Long; event flow, outbox, deployment |
-| **Hoàng** | V. Evaluation, VI. Discussion, VII. Conclusion | 1.700–1.900 | Thiết kế thực nghiệm, xử lý số liệu, bảng và biểu đồ kết quả |
+| Thành viên      | Chương sở hữu                              | Số từ mục tiêu | Trách nhiệm bổ sung                                                                 |
+| ----------------- | ---------------------------------------------- | -----------------: | -------------------------------------------------------------------------------------- |
+| **Dương** | Abstract, I. Introduction, II. Related Work    |       1.700–1.900 | Tìm, kiểm chứng và chuẩn hóa nguồn học thuật; tổng hợp abstract cuối cùng |
+| **Huy**     | III. System Architecture & Security            |       1.700–1.900 | Sơ đồ kiến trúc, service decomposition, database ownership, security              |
+| **Duy**     | IV. Event-Driven Design & Infrastructure       |       1.400–1.600 | Toàn bộ phần viết Gateway/Kafka/DevOps của Long; event flow, outbox, deployment   |
+| **Hoàng**  | V. Evaluation, VI. Discussion, VII. Conclusion |       1.700–1.900 | Thiết kế thực nghiệm, xử lý số liệu, bảng và biểu đồ kết quả            |
 
 Mục tiêu là **cân bằng tổng công sức** (nghiên cứu, viết, vẽ hình, chạy test, phân tích), không chỉ chia số từ bằng nhau. Duy ít từ hơn vì phải tiếp nhận phần kỹ thuật của Long; các thành viên khác hỗ trợ cung cấp log và môi trường test cho Hoàng.
 
@@ -92,14 +92,14 @@ Mục tiêu là **cân bằng tổng công sức** (nghiên cứu, viết, vẽ 
 
 ## 4. Quy tắc tránh trùng lặp
 
-| Chủ đề | Chủ sở hữu nội dung | Giới hạn phần còn lại |
-|---|---|---|
-| Lý thuyết Microservices, EDA, công trình trước | **Dương** | Huy/Duy chỉ giải thích cách **hệ thống này** áp dụng |
-| Sơ đồ kiến trúc, phân tách service, quyền và DB | **Huy** | Duy chỉ nhắc thành phần đủ để giải thích luồng hoạt động |
-| Gateway filter/routing, Kafka, Outbox, Docker/CI-CD | **Duy** | Huy chỉ đề cập Gateway ở cấp độ kiến trúc và phân quyền |
-| Workflow liên service | **Duy** | Huy chỉ mô tả trách nhiệm của mỗi service |
-| Thực nghiệm, số liệu, đồ thị, phân tích kết quả | **Hoàng** | Người khác cung cấp log, setup và xác nhận kỹ thuật |
-| Phần Gateway/Kafka/DevOps của Long | **Duy** | Các bạn khác review và hỗ trợ khi cần, không cùng viết |
+| Chủ đề                                                  | Chủ sở hữu nội dung | Giới hạn phần còn lại                                             |
+| ---------------------------------------------------------- | ----------------------- | ---------------------------------------------------------------------- |
+| Lý thuyết Microservices, EDA, công trình trước       | **Dương**       | Huy/Duy chỉ giải thích cách **hệ thống này** áp dụng    |
+| Sơ đồ kiến trúc, phân tách service, quyền và DB   | **Huy**           | Duy chỉ nhắc thành phần đủ để giải thích luồng hoạt động |
+| Gateway filter/routing, Kafka, Outbox, Docker/CI-CD        | **Duy**           | Huy chỉ đề cập Gateway ở cấp độ kiến trúc và phân quyền   |
+| Workflow liên service                                     | **Duy**           | Huy chỉ mô tả trách nhiệm của mỗi service                       |
+| Thực nghiệm, số liệu, đồ thị, phân tích kết quả | **Hoàng**        | Người khác cung cấp log, setup và xác nhận kỹ thuật           |
+| Phần Gateway/Kafka/DevOps của Long                       | **Duy**           | Các bạn khác review và hỗ trợ khi cần, không cùng viết       |
 
 **Nguyên tắc:** Mỗi mục và mỗi hình/bảng chỉ có một người sửa chính. Review bằng nhận xét/Pull Request, không tự ý thay phần của người khác. Nếu sửa file dùng chung, báo nhóm trước.
 

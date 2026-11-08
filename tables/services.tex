@@ -12,7 +12,7 @@ Business service & Logical database & Specified responsibility & Repository evid
 Auth & \texttt{auth\_db} & Accounts, roles, access and refresh tokens & Controllers, security code, and migrations present; declared in Compose. \\
 User and Notification & \texttt{user\_db} & Profiles, staff-building assignments, notifications & Controllers, assignment lookup, and migrations present; declared in Compose. \\
 Property & \texttt{property\_db} & Buildings, rooms, prices, spatial search & Fuller code and PostGIS query in separate Gradle project; parent Maven module contains a bootstrap class and migrations; absent from main Compose. \\
-Listing and Booking & \texttt{listing\_db} & Listings, rental requests, viewings, roommate applications & Gateway route and database name configured; \texttt{listing-service} has migrations but no Java service and is absent from the parent build and Compose. \\
+Listing and Booking & \texttt{listing\_db} & Listings, rental requests, viewings, roommate applications & Gateway route and database configured; historical compiled JAR and migration files under \texttt{target}, but no current Java source or build descriptor; absent from parent build and Compose. \\
 Contract and Tenant & \texttt{contract\_db} & Contracts, tenants, move-out requests & Controllers, role and building checks, and migrations present; absent from main Compose. \\
 Billing and Utility & \texttt{billing\_db} & Meters, readings, invoices, payments & Controllers and SQL present; migration directory differs from Flyway configuration; absent from main Compose. \\
 Asset and Maintenance & \texttt{asset\_db} & Appliances, fault reports, work and schedules & Controllers, role and building checks, and migration present; declared in Compose. \\

@@ -1,99 +1,53 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="915" viewBox="0 0 1200 610" role="img" aria-label="Source-audited rental microservices architecture">
-  <defs>
-    <style>
-      .title{font:700 23px Arial,sans-serif;fill:#172337}
-      .subtitle{font:13px Arial,sans-serif;fill:#526174}
-      .head{font:700 18px Arial,sans-serif;fill:#172337}
-      .body{font:14px Arial,sans-serif;fill:#405064}
-      .small{font:12px Arial,sans-serif;fill:#526174}
-      .db{font:700 13px Arial,sans-serif;fill:#163c53}
-      .route{stroke:#48637a;stroke-width:2.5;fill:none}
-      .discover{stroke:#51736b;stroke-width:2;stroke-dasharray:5 5;fill:none}
-    </style>
-    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
-      <path d="M0 0 L9 4.5 L0 9 Z" fill="#48637a"/>
-    </marker>
-  </defs>
-  <rect x="0" y="0" width="1200" height="610" fill="#ffffff"/>
-  <text x="40" y="40" class="title">Rental platform: specified boundaries and repository evidence</text>
-  <text x="40" y="61" class="subtitle">Solid = Java and schema present  ·  Amber dash = separate Property project  ·  Gray dash = no Java service</text>
-
-  <rect x="42" y="91" width="258" height="66" rx="8" fill="#f5f8fb" stroke="#708398" stroke-width="1.7"/>
-  <text x="171" y="118" class="head" text-anchor="middle">Clients</text>
-  <text x="171" y="141" class="body" text-anchor="middle">CUSTOMER · STAFF · ADMIN</text>
-
-  <rect x="361" y="91" width="464" height="66" rx="8" fill="#e9f1f5" stroke="#29495d" stroke-width="2"/>
-  <text x="593" y="118" class="head" text-anchor="middle">API Gateway</text>
-  <text x="593" y="141" class="body" text-anchor="middle">JWT authentication · /api/v1 routes · identity headers</text>
-
-  <rect x="888" y="91" width="270" height="66" rx="8" fill="#eef5f1" stroke="#51736b" stroke-width="1.7"/>
-  <text x="1023" y="118" class="head" text-anchor="middle">Eureka</text>
-  <text x="1023" y="141" class="body" text-anchor="middle">logical service discovery</text>
-
-  <path d="M300 124 H354" class="route" marker-end="url(#arrow)"/>
-  <path d="M831 124 H882" class="discover"/>
-  <path d="M593 157 V183 M165 183 H1010" class="route"/>
-  <path d="M170 183 V209 M450 183 V209 M730 183 V209 M1010 183 V209" class="route"/>
-  <path d="M310 183 V344 M590 183 V344 M870 183 V344" class="route"/>
-
-  <g>
-    <rect x="40" y="210" width="260" height="115" rx="8" fill="#fff" stroke="#29495d" stroke-width="2"/>
-    <rect x="40" y="210" width="260" height="7" rx="3" fill="#29495d"/>
-    <text x="54" y="240" class="head">Auth</text>
-    <text x="54" y="263" class="body">Accounts · roles · tokens</text>
-    <text x="54" y="286" class="db">auth_db</text>
-    <text x="54" y="309" class="small">Java + schema; Compose</text>
-  </g>
-  <g>
-    <rect x="320" y="210" width="260" height="115" rx="8" fill="#fff" stroke="#29495d" stroke-width="2"/>
-    <rect x="320" y="210" width="260" height="7" rx="3" fill="#29495d"/>
-    <text x="334" y="240" class="head">User + Notification</text>
-    <text x="334" y="263" class="body">Profiles · assignments · notices</text>
-    <text x="334" y="286" class="db">user_db</text>
-    <text x="334" y="309" class="small">Java + schema; Compose</text>
-  </g>
-  <g>
-    <rect x="600" y="210" width="260" height="115" rx="8" fill="#fffaf0" stroke="#b4762e" stroke-width="2" stroke-dasharray="9 5"/>
-    <text x="614" y="240" class="head">Property</text>
-    <text x="614" y="263" class="body">Buildings · rooms · spatial search</text>
-    <text x="614" y="286" class="db">property_db + PostGIS</text>
-    <text x="614" y="309" class="small">Gradle code; Maven stub</text>
-  </g>
-  <g>
-    <rect x="880" y="210" width="280" height="115" rx="8" fill="#f8f9fb" stroke="#8b98a6" stroke-width="2" stroke-dasharray="3 5"/>
-    <text x="894" y="240" class="head">Listing + Booking</text>
-    <text x="894" y="263" class="body">Listings · requests · viewings</text>
-    <text x="894" y="286" class="db">listing_db</text>
-    <text x="894" y="309" class="small">Specified; no Java service</text>
-  </g>
-
-  <g>
-    <rect x="180" y="345" width="260" height="115" rx="8" fill="#fff" stroke="#29495d" stroke-width="2"/>
-    <rect x="180" y="345" width="260" height="7" rx="3" fill="#29495d"/>
-    <text x="194" y="375" class="head">Contract + Tenant</text>
-    <text x="194" y="398" class="body">Terms · occupancy · move-out</text>
-    <text x="194" y="421" class="db">contract_db</text>
-    <text x="194" y="444" class="small">Java + schema; no Compose</text>
-  </g>
-  <g>
-    <rect x="460" y="345" width="260" height="115" rx="8" fill="#fff" stroke="#29495d" stroke-width="2"/>
-    <rect x="460" y="345" width="260" height="7" rx="3" fill="#29495d"/>
-    <text x="474" y="375" class="head">Billing + Utility</text>
-    <text x="474" y="398" class="body">Meters · invoices · payments</text>
-    <text x="474" y="421" class="db">billing_db</text>
-    <text x="474" y="444" class="small">Java; SQL path mismatch</text>
-  </g>
-  <g>
-    <rect x="740" y="345" width="260" height="115" rx="8" fill="#fff" stroke="#29495d" stroke-width="2"/>
-    <rect x="740" y="345" width="260" height="7" rx="3" fill="#29495d"/>
-    <text x="754" y="375" class="head">Asset + Maintenance</text>
-    <text x="754" y="398" class="body">Equipment · reports · work</text>
-    <text x="754" y="421" class="db">asset_db</text>
-    <text x="754" y="444" class="small">Java + schema; Compose</text>
-  </g>
-
-  <rect x="40" y="505" width="1120" height="65" rx="8" fill="#f2f5f7" stroke="#708398" stroke-width="1.5"/>
-  <text x="600" y="532" class="head" text-anchor="middle">PostgreSQL instance</text>
-  <text x="600" y="554" class="body" text-anchor="middle">Seven logical databases configured in init script · service credentials specified · PostGIS for property_db</text>
-  <text x="40" y="593" class="small">Diagram describes repository artifacts and intended boundaries; it does not assert all routes or services are running.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="500" viewBox="0 0 1200 500" role="img" aria-label="Rental microservices and repository status"><rect width="1200" height="500" fill="white"/>
+<rect x="35" y="25" width="270" height="75" rx="6" fill="#f3f6f8" stroke="#233f55" stroke-width="2" />
+<text x="170" y="55" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#172337" text-anchor="middle">Clients</text>
+<text x="170" y="82" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="middle">Customer  |  Staff  |  Admin</text>
+<rect x="365" y="25" width="470" height="75" rx="6" fill="#eaf1f5" stroke="#233f55" stroke-width="2" />
+<text x="600" y="55" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#172337" text-anchor="middle">API Gateway</text>
+<text x="600" y="82" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#45566a" text-anchor="middle">JWT validation  |  public routes</text>
+<rect x="895" y="25" width="270" height="75" rx="6" fill="#edf4f0" stroke="#57756b" stroke-width="2" />
+<text x="1030" y="55" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#172337" text-anchor="middle">Eureka</text>
+<text x="1030" y="82" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#45566a" text-anchor="middle">Service discovery</text>
+<path d="M305 62L365 62" stroke="#233f55" stroke-width="2"  fill="none"/>
+<path d="M835 62L895 62" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M600 100L600 140" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M172 140L1030 140" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<text x="600" y="130" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="middle">Configured service routes</text>
+<path d="M172 140L172 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M457 140L457 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M742 140L742 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M1027 140L1027 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M317 140L317 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M602 140L602 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M887 140L887 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<rect x="35" y="165" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="50" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Auth</text>
+<text x="50" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">auth_db</text>
+<text x="50" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="320" y="165" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="335" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">User + Notification</text>
+<text x="335" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">user_db</text>
+<text x="335" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="605" y="165" width="275" height="125" rx="6" fill="#fffaf1" stroke="#af7029" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="620" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Property</text>
+<text x="620" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">property_db + PostGIS</text>
+<text x="620" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Gradle source | no Compose</text>
+<rect x="890" y="165" width="275" height="125" rx="6" fill="#f7f8fa" stroke="#7d8a99" stroke-width="2" stroke-dasharray="3 6"/>
+<text x="905" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Listing + Booking</text>
+<text x="905" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">listing_db</text>
+<text x="905" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Historical binary only</text>
+<rect x="180" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="195" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Contract + Tenant</text>
+<text x="195" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">contract_db</text>
+<text x="195" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | no Compose</text>
+<rect x="465" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="480" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Billing + Utility</text>
+<text x="480" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">billing_db</text>
+<text x="480" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source | Flyway path mismatch</text>
+<rect x="750" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="765" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Asset + Maintenance</text>
+<text x="765" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">asset_db</text>
+<text x="765" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="35" y="457" width="1130" height="33" rx="6" fill="#f3f6f8" stroke="#8292a2" stroke-width="2" />
+<text x="600" y="480" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#172337" text-anchor="middle">PostgreSQL: seven logical databases configured  |  PostGIS in property_db</text>
 </svg>
