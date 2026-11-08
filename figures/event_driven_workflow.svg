@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="860" viewBox="0 0 1200 860" role="img" aria-label="Event-driven rental workflow">
+<rect width="1200" height="860" fill="white"/>
+<defs>
+<marker id="arrSolid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#233f55"/></marker>
+<marker id="arrDash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d6b"/></marker>
+</defs>
+<!-- Top row: services -->
+<rect x="40" y="70" width="250" height="250" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="165" y="106" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Listing &amp; Booking</text>
+<text x="165" y="140" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">rental requests &#183; listings</text>
+<text x="165" y="168" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">appointments &#183; roommate posts</text>
+<text x="165" y="200" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">PENDING &#8594; VERIFIED &#8594; ACCEPTED</text>
+<rect x="350" y="70" width="230" height="250" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="465" y="106" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Property</text>
+<text x="465" y="140" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">rooms &#183; prices &#183; buildings</text>
+<text x="465" y="168" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">occupancy projection</text>
+<rect x="650" y="70" width="230" height="250" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="765" y="106" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Contract &amp; Tenant</text>
+<text x="765" y="140" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">contracts &#183; tenants &#183; move-outs</text>
+<text x="765" y="168" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">renewals &#183; signatures</text>
+<text x="765" y="200" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">draft &#8594; signed &#8594; active</text>
+<!-- Sync call: Listing to Contract (tenant check) -->
+<path d="M165 70 L165 30 L765 30 L765 70" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="465" y="22" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#233f55" text-anchor="middle">GET /internal/rooms/{roomId}/tenants/{customerId} &#8212; tenant check</text>
+<!-- Sync call: Contract to Property (maxCapacity) -->
+<path d="M650 200 L580 200" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="615" y="190" font-family="Arial,sans-serif" font-size="13.5" font-weight="400" fill="#233f55" text-anchor="middle">GET /internal/rooms/{id}</text>
+<text x="615" y="218" font-family="Arial,sans-serif" font-size="13.5" font-weight="400" fill="#233f55" text-anchor="middle">maxCapacity</text>
+<!-- Kafka band -->
+<rect x="60" y="410" width="1080" height="80" rx="6" fill="#f3f6f8" stroke="#233f55" stroke-width="2"/>
+<text x="80" y="442" font-family="Arial,sans-serif" font-size="15.5" font-weight="700" fill="#172337" text-anchor="start">Apache Kafka &#8212; one topic per owning service (3 partitions)</text>
+<rect x="80" y="454" width="110" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="135" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">auth.events</text>
+<rect x="195" y="454" width="130" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="260" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">property.events</text>
+<rect x="330" y="454" width="115" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="387" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">listing.events</text>
+<rect x="450" y="454" width="120" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="510" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">contract.events</text>
+<rect x="575" y="454" width="105" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="627" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">billing.events</text>
+<rect x="685" y="454" width="95" height="26" rx="5" fill="#ffffff" stroke="#45566a" stroke-width="1"/>
+<text x="732" y="472" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="middle">asset.events</text>
+<text x="800" y="475" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#45566a" text-anchor="start">auto-create off &#183; init container creates topics + .DLT</text>
+<!-- Event arrows: top row <-> band -->
+<path d="M110 320 L110 410" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="125" y="398" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">RentalRequestAccepted</text>
+<path d="M230 410 L230 320" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="245" y="366" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">close / reopen listing</text>
+<path d="M290 410 L290 320" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="305" y="352" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">listing projection</text>
+<path d="M465 320 L465 410" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="480" y="395" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">RoomStatusChanged</text>
+<path d="M540 410 L540 320" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="555" y="345" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">occupancy</text>
+<path d="M760 320 L760 410" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="748" y="365" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="end">ContractSigned &#183; MoveOutApproved &#183; &#8230;</text>
+<path d="M830 410 L830 320" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="845" y="390" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">RentalRequestAccepted &#8594; draft</text>
+<!-- Bottom row: services -->
+<rect x="40" y="560" width="230" height="190" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="155" y="596" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Auth</text>
+<text x="155" y="630" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">accounts &#183; roles &#183; sessions</text>
+<text x="155" y="660" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">AccountRegistered &#8594; outbox</text>
+<rect x="300" y="560" width="230" height="190" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="415" y="596" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Asset &amp; Maintenance</text>
+<text x="415" y="630" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">reports &#183; work requests</text>
+<text x="415" y="660" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">MaintenanceScheduleDue (06:00)</text>
+<rect x="560" y="560" width="230" height="190" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="675" y="596" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">Billing &amp; Utility</text>
+<text x="675" y="630" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">contract summary &#183; invoices</text>
+<text x="675" y="660" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">InvoiceIssued &#183; PaymentReceived</text>
+<rect x="820" y="560" width="340" height="190" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="990" y="596" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#172337" text-anchor="middle">User &amp; Notification</text>
+<text x="990" y="630" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">profiles &#183; devices &#183; notifications</text>
+<text x="990" y="660" font-family="Arial,sans-serif" font-size="14" font-weight="700" fill="#233f55" text-anchor="middle">all six topics &#8594; e-mail / push</text>
+<!-- Event arrows: band <-> bottom row -->
+<path d="M155 560 L155 490" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="170" y="515" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">AccountRegistered &#8212; auth.events</text>
+<path d="M415 560 L415 490" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="400" y="538" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="end">ReportCreated &#183; MaintenanceScheduleDue</text>
+<path d="M675 560 L675 490" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="690" y="515" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="start">InvoiceIssued &#183; PaymentReceived &#183; &#8230;</text>
+<path d="M760 490 L760 560" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="745" y="538" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="end">ContractSigned &#8594; summary</text>
+<path d="M990 490 L990 560" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="975" y="538" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#2e7d6b" text-anchor="end">all six topics &#8594; e-mail / push</text>
+<!-- Sync call: Billing to User (staff buildings) -->
+<path d="M675 750 L675 795 L990 795 L990 750" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="832" y="787" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#233f55" text-anchor="middle">GET /internal/staff/{staffId}/buildings &#8212; cached 5 min</text>
+<!-- Legend -->
+<path d="M60 808 L92 808" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="100" y="813" font-family="Arial,sans-serif" font-size="13.5" font-weight="400" fill="#172337" text-anchor="start">Synchronous HTTP via OpenFeign &#8212; closed /internal/ reads &#183; GET-only retry &#183; circuit breaker</text>
+<path d="M60 828 L92 828" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrDash)"/>
+<text x="100" y="833" font-family="Arial,sans-serif" font-size="13.5" font-weight="400" fill="#172337" text-anchor="start">Kafka event &#8212; outbox &#8594; broker &#8594; consumer &#183; at-least-once, idempotent consumers</text>
+<text x="60" y="851" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#45566a" text-anchor="start">Other verified sync reads (not drawn): Billing &#8594; Contract (billing-data) &#183; Asset &#8594; Contract (tenant check) &#183; Chat context</text>
+</svg>

@@ -1,16 +1,19 @@
-% Owner: Duy. Logical event classes only; exact Kafka topic names are TODO.
+% Owner: Duy. Verified from source code: topic constants in each publisher, @KafkaListener
+% annotations, and the kafka-init container in infra/docker-compose.yml (3 partitions, RF=1 for dev).
 \begin{table*}[t]
-\caption{Candidate Event Topics and Publishers}
+\caption{Verified Event Topics, Publishers, and Consumers}
 \label{tab:events}
 \centering\footnotesize
-\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth}p{0.22\textwidth}X X@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.13\textwidth}p{0.17\textwidth}X X@{}}
 \toprule
-Logical event or topic & Proposed publisher & State change represented & Contract details to verify \\
+Topic & Publisher (owner) & Event types & Consumers (group id) \\
 \midrule
-Booking confirmed & Listing and Booking & Booking has passed the owner's confirmation rule & Topic name, key, schema, consumers \\
-Contract activated & Contract and Tenant & Contract or tenancy has entered its active state & Legal trigger, topic name, key, consumers \\
-Bill issued & Billing and Utility & A bill is available under the owner's rules & Billing trigger, topic name, schema, consumers \\
-Maintenance requested & Asset and Maintenance & A maintenance request has been recorded & Topic name, key, schema, consumers \\
+\texttt{auth.events} & Auth Service & \texttt{AccountRegistered} & User and Notification (profile synchronization) \\
+\texttt{property.events} & Property Service & \texttt{RoomStatusChanged}, \texttt{RoomDeleted}, \texttt{RoomPriceChanged}, \texttt{BuildingUpdated} & Listing and Booking (listing projection), User and Notification \\
+\texttt{listing.events} & Listing and Booking Service & \texttt{RentalRequestCreated}, \texttt{RentalRequestAccepted}, \texttt{RentalRequestRejected}, \texttt{AppointmentScheduled}, \texttt{AppointmentStatusChanged}, \texttt{RoommateApplicationCreated}, \texttt{RoommateApplicationAccepted}, \texttt{RoommateApplicationRejected} & Contract and Tenant (draft contract creation), User and Notification \\
+\texttt{contract.events} & Contract and Tenant Service & \texttt{ContractSigned}, \texttt{ContractRenewed}, \texttt{ContractEnded}, \texttt{TenantAdded}, \texttt{TenantAddRejected}, \texttt{TenantRemoved}, \texttt{MoveOutRequested}, \texttt{MoveOutApproved}, \texttt{ContractSignatureDeclined}, \texttt{ContractSignatureExpired}, \texttt{ContractRenewalRequested}, \texttt{ContractRenewalApproved}, \texttt{ContractRenewalRejected}, \texttt{MeterReadingHandoverDue} & Billing and Utility (contract summary), Listing and Booking (listing lifecycle), Property (occupancy projection), User and Notification \\
+\texttt{billing.events} & Billing and Utility Service & \texttt{InvoiceIssued}, \texttt{PaymentReceived}, \texttt{InvoiceOverdue}, \texttt{MeterReadingMissing}, \texttt{MeterReadingReminder} & User and Notification \\
+\texttt{asset.events} & Asset and Maintenance Service & \texttt{ReportCreated}, \texttt{ReportRejected}, \texttt{MaintenanceRequestAssigned}, \texttt{MaintenanceCompleted}, \texttt{MaintenanceScheduleDue} & User and Notification \\
 \bottomrule
 \end{tabularx}
 \end{table*}

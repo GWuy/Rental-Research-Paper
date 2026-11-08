@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="770" viewBox="0 0 1200 770" role="img" aria-label="Deployment topology">
+<rect width="1200" height="770" fill="white"/>
+<defs>
+<marker id="arrSolid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#233f55"/></marker>
+<marker id="arrTeal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#2e7d6b"/></marker>
+</defs>
+<!-- Private network boundary -->
+<rect x="305" y="25" width="865" height="590" rx="10" fill="none" stroke="#7d8a99" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="745" y="15" font-family="Arial,sans-serif" font-size="14" font-weight="400" fill="#45566a" text-anchor="middle">rental-net &#8212; private Docker bridge network</text>
+<!-- Client -->
+<rect x="40" y="40" width="240" height="65" rx="6" fill="#f3f6f8" stroke="#233f55" stroke-width="2"/>
+<text x="160" y="67" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">Clients</text>
+<text x="160" y="91" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">browser &#183; mobile apps</text>
+<path d="M280 72 L340 72" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="310" y="30" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#233f55" text-anchor="middle">HTTPS :8080 &#8212; host-published</text>
+<!-- Gateway -->
+<rect x="340" y="40" width="520" height="65" rx="6" fill="#eaf1f5" stroke="#233f55" stroke-width="2"/>
+<text x="600" y="67" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">api-gateway :8080</text>
+<text x="600" y="91" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">Spring Cloud Gateway &#8212; JWT filter &#183; correlation ID &#183; whitelist</text>
+<!-- Eureka -->
+<rect x="920" y="40" width="240" height="65" rx="6" fill="#edf4f0" stroke="#57756b" stroke-width="2"/>
+<text x="1040" y="67" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">Eureka :8761</text>
+<text x="1040" y="91" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">discovery-server</text>
+<!-- Gateway routing bus -->
+<path d="M600 105 L600 135" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M170 135 L1030 135" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<text x="620" y="128" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#233f55" text-anchor="start">configured routes &#8212; lb://service-id</text>
+<path d="M1030 105 L1030 135" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<text x="1045" y="122" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="start">registration / lookup</text>
+<!-- Drops into row 1 -->
+<path d="M170 135 L170 160" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M450 135 L450 160" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M730 135 L730 160" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M1020 135 L1020 160" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<!-- Jogs into row 2 -->
+<path d="M310 135 L310 238 L170 238 L170 250" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M590 135 L590 238 L450 238 L450 250" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M870 135 L870 238 L730 238 L730 250" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<path d="M870 238 L1020 238 L1020 250" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrSolid)"/>
+<!-- Row 1 services -->
+<rect x="40" y="160" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="170" y="187" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">auth-service</text>
+<text x="170" y="210" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8081 &#183; auth_db</text>
+<rect x="320" y="160" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="450" y="187" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">user-notification</text>
+<text x="450" y="210" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8082 &#183; user_db</text>
+<rect x="600" y="160" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="730" y="187" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">properties</text>
+<text x="730" y="210" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8083 &#183; property_db + PostGIS</text>
+<rect x="880" y="160" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="1010" y="187" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">listing-booking</text>
+<text x="1010" y="210" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8084 &#183; listing_db</text>
+<!-- Row 2 services -->
+<rect x="40" y="250" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="170" y="277" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">contract-tenant</text>
+<text x="170" y="300" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8085 &#183; contract_db</text>
+<rect x="320" y="250" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="450" y="277" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">billing-utility</text>
+<text x="450" y="300" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8086 &#183; billing_db</text>
+<rect x="600" y="250" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="730" y="277" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">asset-maintenance</text>
+<text x="730" y="300" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8087 &#183; asset_db</text>
+<rect x="880" y="250" width="260" height="70" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2"/>
+<text x="1010" y="277" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">chat-service</text>
+<text x="1010" y="300" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">:8088 &#183; chat_db</text>
+<!-- Connectors to persistent layer -->
+<path d="M170 320 L170 430" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="185" y="368" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#233f55" text-anchor="start">JDBC :5432</text>
+<text x="185" y="386" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="start">8 databases &#8212; one per service</text>
+<path d="M650 320 L650 430" stroke="#2e7d6b" stroke-width="2" stroke-dasharray="7 5" fill="none" marker-end="url(#arrTeal)"/>
+<text x="665" y="368" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#2e7d6b" text-anchor="start">events &#8212; kafka:9092</text>
+<text x="665" y="386" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="start">outbox publishers + consumers</text>
+<path d="M1010 320 L1010 430" stroke="#233f55" stroke-width="2" fill="none" marker-end="url(#arrSolid)"/>
+<text x="995" y="368" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#233f55" text-anchor="end">S3 :9000 &#8212; presigned uploads</text>
+<text x="995" y="386" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="end">property &#183; listing &#183; contract &#183; asset</text>
+<!-- Persistent components -->
+<rect x="40" y="430" width="400" height="130" rx="6" fill="#f3f6f8" stroke="#233f55" stroke-width="2"/>
+<text x="240" y="466" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">PostgreSQL 16 + PostGIS</text>
+<text x="240" y="490" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">rental-postgres &#8212; init script creates all databases</text>
+<text x="240" y="514" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">auth_db &#183; user_db &#183; property_db &#183; listing_db</text>
+<text x="240" y="536" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">contract_db &#183; billing_db &#183; asset_db &#183; chat_db</text>
+<rect x="470" y="430" width="360" height="130" rx="6" fill="#edf4f0" stroke="#57756b" stroke-width="2"/>
+<text x="650" y="466" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">Apache Kafka 3.8.0 &#8212; KRaft</text>
+<text x="650" y="490" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">rental-kafka &#183; single broker &#183; 3 partitions per topic</text>
+<text x="650" y="514" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">6 topics + .DLT &#183; auto-create off</text>
+<text x="650" y="536" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">kafka-init creates topics &#183; kafka-ui (dev)</text>
+<rect x="860" y="430" width="300" height="130" rx="6" fill="#eaf1f5" stroke="#233f55" stroke-width="2"/>
+<text x="1010" y="466" font-family="Arial,sans-serif" font-size="16" font-weight="700" fill="#172337" text-anchor="middle">MinIO &#8212; S3</text>
+<text x="1010" y="490" font-family="Arial,sans-serif" font-size="12.5" font-weight="400" fill="#45566a" text-anchor="middle">rental-minio &#183; minio-init creates buckets</text>
+<text x="1010" y="514" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">report-images &#183; property-images</text>
+<text x="1010" y="536" font-family="Arial,sans-serif" font-size="12" font-weight="400" fill="#45566a" text-anchor="middle">identity-documents &#183; contract-documents</text>
+<!-- Notes -->
+<text x="40" y="630" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#172337" text-anchor="start">Startup order: postgres &#8594; kafka-init (topics + .DLT) &#8594; minio-init (buckets) &#8594; discovery &#8594; 8 services &#8594; gateway &#8212; depends_on + health checks</text>
+<text x="40" y="648" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#45566a" text-anchor="start">Every service registers with Eureka and is routed by lb://service-id &#8212; all ports stay internal except the gateway :8080</text>
+<!-- CI/CD -->
+<rect x="40" y="660" width="1120" height="95" rx="6" fill="#fffaf1" stroke="#af7029" stroke-width="2" stroke-dasharray="9 6"/>
+<text x="600" y="691" font-family="Arial,sans-serif" font-size="15" font-weight="700" fill="#172337" text-anchor="middle">Continuous Integration &#8212; GitHub Actions (rental-system-backend)</text>
+<text x="600" y="714" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#45566a" text-anchor="middle">ubuntu-latest &#183; Temurin JDK 21 &#183; Maven dependency cache</text>
+<text x="600" y="737" font-family="Arial,sans-serif" font-size="13" font-weight="400" fill="#45566a" text-anchor="middle">mvn -B clean verify &#8212; unit tests + Testcontainers integration tests on every push / pull request</text>
+</svg>
