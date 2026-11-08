@@ -1,17 +1,17 @@
-% Owner: Hoang. All outcomes and measurements remain TODO until experiments are run.
+% Owner: Hoang.
 \begin{table*}[t]
-\caption{Experimental Scenarios and Required Evidence}
+\caption{Planned Experimental Scenarios and Required Evidence}
 \label{tab:experiments}
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}X X@{}}
 \toprule
-Scenario & Procedure and controlled variable & Evidence to report \\
+Scenario & Procedure & Evidence to report \\
 \midrule
-API throughput and latency & Increase offered request rate with a fixed operation mix; repeat each load level & Achieved throughput, error rate, latency percentiles, run variation: TODO \\
-Kafka event processing & Commit a known sequence of changes; track corresponding publication and consumption & End-to-end lag, missing events, retries, trace IDs: TODO \\
-Duplicate event handling & Replay known identifiers before and after consumer restart & Number of business effects per identifier and deduplication records: TODO \\
-Service failure recovery & Stop a selected service during a defined workflow; restore it & Failed requests, pending work, invariant recovery time: TODO \\
-Transactional outbox recovery & Interrupt relay around commit, send, and acknowledgement points & Outbox state, repeated publications, eventual consumer effects: TODO \\
+API throughput and latency & Increase the offered request rate and repeat each level using equivalent fixtures & Successful requests per second, error and timeout counts, p50, p95, and p99 latency \\
+Kafka event processing & Accept a known batch and trace each request from commit to draft creation & Publication and completion latency, matched requests, and requests pending at cutoff \\
+Duplicate event handling & Replay the same envelope after the original commit and again after consumer restart & Observed replays, processed-event records, and contract count per request \\
+Consumer recovery & Accept requests while Contract and Tenant is stopped, then restart it & Events published during outage, backlog clearance time, and final contract count \\
+Outbox recovery & Interrupt publication after commit and, when controllable, after broker acknowledgement & Pending outbox rows, repeated publications, recovery time, and final contract count \\
 \bottomrule
 \end{tabularx}
 \end{table*}
