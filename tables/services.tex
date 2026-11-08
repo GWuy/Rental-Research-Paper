@@ -1,36 +1,21 @@
-% Owner: Huy. Both grids are in one float so the four requested core tables remain Tables I--IV.
+% Owner: Huy. "Present" means repository artifacts, not a verified running service.
+% Evidence: specification sections 3 and 9; backend parent pom, service source,
+% migrations, and infra/docker-compose.yml.
 \begin{table*}[t]
-\caption{Microservices, Candidate Responsibilities, and Data Ownership}
+\caption{Specified Business Services, Data Ownership, and Source Audit}
 \label{tab:services}
 \centering\footnotesize
-\textbf{A. Service responsibilities}\\[3pt]
-\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth}X@{}}
+\begin{tabularx}{\textwidth}{@{}p{0.17\textwidth}p{0.16\textwidth}X X@{}}
 \toprule
-Business service & Proposed responsibility; verify against specification \\
+Business service & Logical database & Specified responsibility & Repository evidence and integration status \\
 \midrule
-Auth & Identity, credentials, and token or session lifecycle \\
-User and Notification & User profile and notification dispatch \\
-Property & Property and rentable-unit inventory \\
-Listing and Booking & Public listing state, availability, and booking intent \\
-Contract and Tenant & Contract terms and tenancy lifecycle \\
-Billing and Utility & Charges, invoices, and utility readings \\
-Asset and Maintenance & Asset records, maintenance requests, and work status \\
-\bottomrule
-\end{tabularx}
-
-\vspace{5pt}
-\textbf{B. Logical database ownership}\\[3pt]
-\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth}X@{}}
-\toprule
-Sole writer & Candidate owned records; physical database/schema to be verified \\
-\midrule
-Auth & Identity and credential records \\
-User and Notification & Profiles and notification delivery records \\
-Property & Properties and rentable units \\
-Listing and Booking & Listings, availability, and bookings \\
-Contract and Tenant & Contracts and tenant associations \\
-Billing and Utility & Bills, payments or payment references, and utility readings \\
-Asset and Maintenance & Assets and maintenance requests \\
+Auth & \texttt{auth\_db} & Accounts, roles, access and refresh tokens & Controllers, security code, and migrations present; declared in Compose. \\
+User and Notification & \texttt{user\_db} & Profiles, staff-building assignments, notifications & Controllers, assignment lookup, and migrations present; declared in Compose. \\
+Property & \texttt{property\_db} & Buildings, rooms, prices, spatial search & Fuller code and PostGIS query in separate Gradle project; parent Maven module contains a bootstrap class and migrations; absent from main Compose. \\
+Listing and Booking & \texttt{listing\_db} & Listings, rental requests, viewings, roommate applications & Gateway route and database name configured; \texttt{listing-service} has migrations but no Java service and is absent from the parent build and Compose. \\
+Contract and Tenant & \texttt{contract\_db} & Contracts, tenants, move-out requests & Controllers, role and building checks, and migrations present; absent from main Compose. \\
+Billing and Utility & \texttt{billing\_db} & Meters, readings, invoices, payments & Controllers and SQL present; migration directory differs from Flyway configuration; absent from main Compose. \\
+Asset and Maintenance & \texttt{asset\_db} & Appliances, fault reports, work and schedules & Controllers, role and building checks, and migration present; declared in Compose. \\
 \bottomrule
 \end{tabularx}
 \end{table*}
