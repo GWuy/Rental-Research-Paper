@@ -1,0 +1,36 @@
+% Owner: Huy. Both grids are in one float so the four requested core tables remain Tables I--IV.
+\begin{table*}[t]
+\caption{Microservices, Candidate Responsibilities, and Data Ownership}
+\label{tab:services}
+\centering\footnotesize
+\textbf{A. Service responsibilities}\\[3pt]
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth}X@{}}
+\toprule
+Business service & Proposed responsibility; verify against specification \\
+\midrule
+Auth & Identity, credentials, and token or session lifecycle \\
+User and Notification & User profile and notification dispatch \\
+Property & Property and rentable-unit inventory \\
+Listing and Booking & Public listing state, availability, and booking intent \\
+Contract and Tenant & Contract terms and tenancy lifecycle \\
+Billing and Utility & Charges, invoices, and utility readings \\
+Asset and Maintenance & Asset records, maintenance requests, and work status \\
+\bottomrule
+\end{tabularx}
+
+\vspace{5pt}
+\textbf{B. Logical database ownership}\\[3pt]
+\begin{tabularx}{\textwidth}{@{}p{0.24\textwidth}X@{}}
+\toprule
+Sole writer & Candidate owned records; physical database/schema to be verified \\
+\midrule
+Auth & Identity and credential records \\
+User and Notification & Profiles and notification delivery records \\
+Property & Properties and rentable units \\
+Listing and Booking & Listings, availability, and bookings \\
+Contract and Tenant & Contracts and tenant associations \\
+Billing and Utility & Bills, payments or payment references, and utility readings \\
+Asset and Maintenance & Assets and maintenance requests \\
+\bottomrule
+\end{tabularx}
+\end{table*}

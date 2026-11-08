@@ -1,0 +1,16 @@
+% Owner: Duong. Add verified rental-domain and empirical studies before submission.
+\section{Related Work}\label{sec:related}
+
+\subsection{Traditional Rental Management Systems}
+A rental-management system may centralize listings, reservations, contracts, payments, and maintenance records in one application and database. Such an arrangement offers straightforward local transactions and simple joins across those records. It can also make independent changes to each domain harder when one schema or release process serves the entire platform. This is a design comparison, not an empirical claim about existing products. \todo{Identify and cite verified studies or documented rental-management systems; compare their actual capabilities and deployment models.}
+
+\subsection{Microservices Architecture}
+Microservice decomposition assigns a business capability and its data to a service boundary. Richardson's treatment of database-per-service, API composition, and distributed transaction patterns supplies a foundation for examining these boundaries \cite{richardson2018microservices}. The boundary itself does not settle consistency: a command can commit locally while another service remains unaware of it. The rental case therefore needs explicit ownership rules, an account of where synchronous calls are justified, and a policy for information that can arrive later. Section~\ref{sec:architecture} turns those general design concerns into a candidate service model.
+
+\subsection{Event-Driven Architecture in Distributed Systems}
+Events can record a completed local fact and allow other services to react without a synchronous chain of commands. Their use requires care with delivery semantics, ordering, replay, and consumer failure. Kleppmann's discussion of logs and distributed data clarifies why an event stream is not itself a guarantee that every consumer has updated its own state \cite{kleppmann2017designing}. Transactional outbox and idempotent receiver patterns are therefore treated as design mechanisms to be tested, not as proof of end-to-end exactly-once effects. Section~\ref{sec:events} identifies the proposed event boundaries and the evidence needed to confirm them.
+
+\subsection{Existing Approaches and Research Gaps}
+Table~\ref{tab:related} separates general architectural sources from evidence still needed for this specific domain. The two foundational books explain design mechanisms but do not constitute an empirical rental-platform comparison. A defensible research gap will require verified studies of rental workflows and comparable system evaluations. Until those sources are added, the paper can ask whether the proposed mechanisms meet its own measured requirements, but it cannot claim superiority over prior systems. \todo{Complete a reproducible literature search and add verified, directly relevant academic sources.}
+
+\input{tables/related_work}

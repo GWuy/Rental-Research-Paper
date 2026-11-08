@@ -1,0 +1,36 @@
+% Owner: Huy. Target for this section and Table II: 1,700--1,900 words at completion.
+\section{System Architecture and Security}\label{sec:architecture}
+
+\subsection{System Overview and Requirements}
+The proposed platform organizes rental operations around seven business services named in the project brief. The architecture must support users with different responsibilities, maintain clear ownership of properties and tenancy records, and allow a rental workflow to continue when some downstream actions are delayed. These are design goals rather than verified functional requirements: the system specification is not yet available for checking. The architecture also calls for Java Spring Boot services, PostgreSQL persistence, an API gateway, Eureka-based discovery, OpenFeign, and Kafka. The last three infrastructure choices are discussed in Section~\ref{sec:events}; this section focuses on business and access boundaries.
+
+Figure~\ref{fig:architecture} reserves space for a diagram of external clients, entry points, seven services, and their owned data stores. The final diagram should show actual deployed components and distinguish a logical service from a running instance. \todo{Verify functional and nonfunctional requirements, actor types, and deployed components against the system specification and source code.}
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Overall Microservices Architecture}
+\caption{Placeholder for the verified service and data-ownership architecture.}
+\label{fig:architecture}
+\end{figure}
+
+\subsection{Microservices Decomposition}
+Table~\ref{tab:services} records a candidate allocation of responsibilities. Auth Service concerns identity and session or token lifecycle. User and Notification Service concerns profiles and delivery of user-facing notices. Property Service owns descriptions of the physical property inventory. Listing and Booking Service handles market-facing availability and booking intent. Contract and Tenant Service handles the legal or operational tenancy state. Billing and Utility Service handles charges, bills, and utility readings. Asset and Maintenance Service handles asset inventories and repair requests. These responsibilities follow the service names in the brief; actual interfaces and data entities require verification.
+
+A useful boundary test is whether a service can decide a local invariant using data it owns. A booking service, for example, should be able to prevent overlapping confirmed bookings for the same unit using its authoritative availability state. It may need property identifiers, but direct writes to Property Service tables would undermine ownership. Likewise, a contract may refer to a booking and tenant without turning those external records into contract-owned data. When a decision needs an immediate answer from another service, the call should have an explicit timeout and a defined response to unavailability. When a later update is acceptable, an event can decouple the two operations. \todo{Document actual invariants, aggregate identifiers, and cross-service dependencies.}
+
+\subsection{Database-per-Service Design}
+Database-per-service is an ownership rule, not necessarily a requirement for seven physical database servers. Each service should be the sole writer of its logical data store, with other services accessing that data through documented interfaces or events. Table~\ref{tab:services} distinguishes candidate records for each owner. PostgreSQL schemas, database instances, migration tooling, and foreign-key policy across services must be confirmed from the implementation. Shared read replicas or reporting projections, if any, should be identified explicitly because they can otherwise conceal cross-service coupling.
+
+References across services should use stable identifiers and tolerate temporarily stale copies. A contract record can retain a booking identifier and the agreed terms it must preserve; it should not assume a live join to Booking Service to render a valid historical contract. This is a proposed data-design principle, not a statement about the current schema. The team should document which facts are copied into an immutable snapshot, which are looked up on demand, and how changes are reconciled. \todo{Add actual database/schema names, entity ownership, and migration evidence.}
+
+\subsection{Authentication and Authorization}
+Authentication establishes the caller's identity; authorization decides whether that caller may perform a specific operation on a specific resource. A proposed request path validates an identity token at the gateway and passes authenticated context to a service. The owning service must still enforce role-based access control (RBAC) and resource-level rules. For example, a role granting access to tenancy administration would not by itself prove authority over every tenancy. Any actor-to-role mapping in the final paper must come from the specification, not from an assumed landlord/tenant/admin list.
+
+The security model should document token issuer and verification method, token propagation, expiry behavior, service-to-service identity, and audit requirements. It should also state how a service rejects a forged or missing identity context when called without the gateway. This matters because gateway checks alone do not protect a service endpoint reachable by another network path. \todo{Confirm actual roles, permission matrix, token design, and enforcement points through the specification and code.}
+
+\subsection{Service Interfaces and Access Boundaries}
+External requests should enter through documented gateway routes; internal calls should use explicit service contracts. The distinction between a public operation, an internal command, and an event subscription should be visible in API documentation. For each synchronous dependency, the final design needs a timeout, error mapping, retry policy, and idempotency rule for mutating requests. In particular, blindly retrying a booking creation or billing operation could produce duplicate business effects. Event subscriptions should be documented as consumer responsibilities rather than hidden side effects of an HTTP request.
+
+This division also helps assign review responsibility. Huy owns service boundaries, data ownership, and authorization. Duy owns the detailed mechanics of gateway routing, OpenFeign interaction, Kafka publication, and deployment, as developed in Section~\ref{sec:events}. \todo{Add endpoint inventory, access policy, and tested failure behavior for every cross-service interface.}
+
+\input{tables/services}

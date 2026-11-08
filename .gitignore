@@ -1,0 +1,21 @@
+# LaTeX build outputs
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+main.pdf
+
+# Local experiment output; keep protocols and scripts tracked
+experiments/results/
+experiments/raw/

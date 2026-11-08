@@ -1,0 +1,16 @@
+% Owner: Duong. This is a comparison of source scope, not a claim of measured superiority.
+\begin{table*}[t]
+\caption{Related Work Comparison and Evidence Needed for the Rental Case}
+\label{tab:related}
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth}X X X@{}}
+\toprule
+Source or approach & Scope established by source & Relevance to this design & Evidence still needed \\
+\midrule
+Richardson \cite{richardson2018microservices} & Microservice decomposition and integration patterns & Frames service ownership and outbox-style coordination & Rental-specific implementation and comparative outcomes \\
+Kleppmann \cite{kleppmann2017designing} & Distributed data, logs, and failure semantics & Frames delivery, replay, and consistency questions & Workload-specific measurements and failure traces \\
+Traditional centralized design & Candidate single-application baseline; source pending & Can provide local transaction and deployment comparison & Verified rental-system study and reproducible baseline \\
+This paper's proposed design & Seven named rental services and a planned evaluation & Makes domain boundaries and failure experiments explicit & Specification audit, implementation evidence, and results \\
+\bottomrule
+\end{tabularx}
+\end{table*}

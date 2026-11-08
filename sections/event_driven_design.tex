@@ -1,0 +1,55 @@
+% Owner: Duy. Target for this section and Table III: 1,400--1,600 words at completion.
+\section{Event-Driven Design and Infrastructure}\label{sec:events}
+
+\subsection{Cross-Service Rental Workflow}
+A candidate rental workflow starts when a user requests a listed unit. Listing and Booking Service must first decide whether the booking is valid under its own availability rules. A committed booking may then be announced to interested services, which can prepare a contract record or notify the user. Later changes to tenancy can drive billing or maintenance context. This is a sequence of possible business interactions, not a claim that these steps are implemented or that a notification proves contractual acceptance.
+
+The workflow should be specified as a state machine before implementation claims are made. In particular, a submitted request, confirmed booking, signed contract, and active tenancy represent distinct facts. Each transition needs one authoritative service, a correlation identifier, and a documented outcome when a downstream step fails. Figure~\ref{fig:workflow} reserves space for the verified workflow, including both request-response and event edges. \todo{Replace this candidate path with the actual process, state transitions, and event contracts from the specification and code.}
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Event-Driven Rental Workflow}
+\caption{Placeholder for the verified rental workflow and its communication boundaries.}
+\label{fig:workflow}
+\end{figure}
+
+\subsection{Synchronous Communication with OpenFeign}
+A synchronous call is appropriate when a decision cannot proceed without current information from another service, such as validating a referenced resource or retrieving a required view. OpenFeign can express such HTTP client contracts in the proposed Spring Boot design. The caller nevertheless inherits the callee's latency and availability for the duration of that request. Therefore, each interface must define a timeout, error translation, and whether a retry is safe. A read can often be repeated; a mutating command needs a stable idempotency key or an explicit reason that repeated delivery cannot create a second effect.
+
+Service discovery through Eureka can resolve a logical service name to an instance, but discovery does not guarantee that the selected instance is healthy for the whole request. The final paper should identify which calls are actually synchronous, why they are required, and what the user observes if they fail. \todo{List verified Feign clients, methods, timeout settings, and recovery behavior.}
+
+\subsection{Asynchronous Communication with Apache Kafka}
+Kafka is proposed as the transport for facts that other services may process after the initiating transaction has committed. Table~\ref{tab:events} lists candidate event classes and their likely publishers. It intentionally leaves exact topic identifiers, schemas, subscribers, partition keys, and retention settings unconfirmed. A published event should represent a durable local state change rather than an instruction whose ownership is ambiguous. Consumers can then update their own records or projections without writing to the publisher's database.
+
+Message delivery can be repeated, and consumer progress can lag behind the publisher. The design must say which user-visible views may be temporarily inconsistent and how operators detect a stalled consumer. Ordering should only be assumed within a documented partition key, not across unrelated topics or entities. A correlation identifier can connect the originating API request, the local transaction, and downstream processing in logs. \todo{Verify topic names, schemas, versioning, partition strategy, consumer groups, and observability fields.}
+
+\subsection{Transactional Outbox and Idempotent Processing}
+The transactional outbox addresses a dual-write problem: a service might commit a business change but fail before publishing its event, or publish an event before the database transaction commits. The proposed pattern writes an outbox row in the same local PostgreSQL transaction as the business change. A separate relay publishes that row to Kafka and records or infers publication progress. This links the local state transition and the intent to publish, but the relay can still publish a message more than once when it crashes around acknowledgement. The exact relay implementation is not yet known.
+
+A consumer should therefore apply a business effect and record the message identifier as processed in one local transaction. A repeated message then finds the identifier already present and leaves the business state unchanged. The identifier scope, retention of processed-message records, and behavior after schema changes all need explicit design. Figure~\ref{fig:outbox} reserves space for the actual transaction and relay sequence. \todo{Confirm outbox schema, relay mechanism, deduplication key, atomicity, and replay procedure in implementation.}
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Transactional Outbox Processing}
+\caption{Placeholder for local commit, relay publication, and idempotent consumption.}
+\label{fig:outbox}
+\end{figure}
+
+Retry handling must separate transient failures from messages that cannot be processed under the current schema or business rules. A proposed policy uses bounded retries with backoff, then routes unresolved messages to a dead-letter destination for inspection. Redrive must preserve the original event identifier so idempotency still applies. The final paper should specify who owns that destination, how long messages remain there, and how recovery is audited. A dead-letter queue is an operational proposal here, not a verified component. \todo{Document actual retry limits, backoff, dead-letter setup, alerts, and redrive controls.}
+
+\subsection{API Gateway and Request Processing}
+The API gateway is the proposed external entry point. It can route requests, reject malformed or unauthenticated traffic, and propagate an identity context to services. The service that owns the resource remains responsible for authorization, as discussed in Section~\ref{sec:architecture}. Gateway routing also needs explicit handling for unavailable destinations and timeouts; forwarding an error without context can obscure which service failed. The final design should show the configured routes and any rate limits, tracing headers, and TLS termination points. \todo{Verify gateway product, route configuration, authentication filter, and service-side enforcement.}
+
+\subsection{Deployment and CI/CD Infrastructure}
+A deployment topology should show the gateway, discovery service, seven business services, PostgreSQL ownership boundaries, Kafka brokers, and the outbox relay if one exists. It should also show which components have independent replicas and where persistent state lives. These choices affect reliability tests: restarting one service differs from losing a broker or database. Figure~\ref{fig:deployment} remains a placeholder until the deployed topology is evidenced.
+
+A reproducible continuous integration and delivery process would compile services, run relevant tests, package artifacts, and deploy with versioned configuration. This paper must not claim that such a pipeline is present without configuration files or run history. \todo{Add actual environment, container/orchestration topology, CI/CD stages, artifact versions, and deployment evidence.}
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Deployment Topology}
+\caption{Placeholder for the verified runtime and persistence topology.}
+\label{fig:deployment}
+\end{figure}
+
+\input{tables/events}

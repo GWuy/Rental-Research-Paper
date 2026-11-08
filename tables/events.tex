@@ -1,0 +1,16 @@
+% Owner: Duy. Logical event classes only; exact Kafka topic names are TODO.
+\begin{table*}[t]
+\caption{Candidate Event Topics and Publishers}
+\label{tab:events}
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.19\textwidth}p{0.22\textwidth}X X@{}}
+\toprule
+Logical event or topic & Proposed publisher & State change represented & Contract details to verify \\
+\midrule
+Booking confirmed & Listing and Booking & Booking has passed the owner's confirmation rule & Topic name, key, schema, consumers \\
+Contract activated & Contract and Tenant & Contract or tenancy has entered its active state & Legal trigger, topic name, key, consumers \\
+Bill issued & Billing and Utility & A bill is available under the owner's rules & Billing trigger, topic name, schema, consumers \\
+Maintenance requested & Asset and Maintenance & A maintenance request has been recorded & Topic name, key, schema, consumers \\
+\bottomrule
+\end{tabularx}
+\end{table*}

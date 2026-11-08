@@ -1,0 +1,39 @@
+% Owner: Hoang. Target for Evaluation, Discussion, Conclusion, and Table IV: 1,700--1,900 words at completion.
+\section{Experimental Evaluation}\label{sec:evaluation}
+
+\subsection{Experimental Setup}
+The evaluation must test a known implementation, not an architecture diagram. Before running experiments, the team should record the source revision, service versions, deployment topology, database and broker configuration, machine specifications, network conditions, and enabled observability. The workload should be generated from documented rental operations with a stated mix of reads and writes. Test accounts, properties, and listings must be created from a reproducible seed; the same starting state should be restored between trials. The system specification and implementation are not available here, so no particular endpoint or deployment size is presumed. \todo{Record exact environment, workload generator, seed data, run length, warm-up, repetitions, and raw-data location.}
+
+A baseline must be defined before making any comparative claim. Possible comparisons include a candidate synchronous-only path, an outbox-enabled path, and recovery behavior before and after fault injection, provided each can be implemented without changing unrelated factors. If no defensible baseline exists, report absolute measurements and avoid claims of improvement. Table~\ref{tab:experiments} maps each planned scenario to the evidence it must collect.
+
+\subsection{Evaluation Metrics}
+For an API workload, record completed requests per second, error rate, and latency distributions for each operation rather than only an aggregate mean. Report at least median, 95th percentile, and 99th percentile latency with the sample count and time window. Throughput is the number of successful completed operations divided by the measurement interval; offered load should be reported separately so that saturation is visible. For events, measure elapsed time from local business commit to consumer effect, publication lag, processing lag, retry count, and duplicate business effects. The correlation and event identifiers needed to compute these quantities must be collected consistently.
+
+Reliability should be expressed through counts with explicit denominators: committed business transitions, corresponding published events, eventually applied consumer effects, failures, and duplicates. A zero observed duplicate count is not proof that duplicates are impossible. Recovery time should be measured from fault injection to the return of a stated invariant, such as all committed outbox rows being published and all eligible consumer effects applied. Clock synchronization and timestamp placement matter because a cross-host latency measure can otherwise be misleading. \todo{Define measurement probes, trace fields, acceptance criteria, and treatment of censored or timed-out operations.}
+
+\subsection{API Response Time and Throughput}
+The API experiment should increase offered load in controlled steps while preserving a fixed operation mix. Each step should include warm-up and steady-state windows, repeated runs, and a clean reset of data likely to affect caches or booking availability. A plot of achieved throughput against latency percentiles can reveal a saturation point more clearly than a single maximum-throughput number. Results should be split by operation because listing reads and booking writes have different dependencies. Figure~\ref{fig:performance} reserves space for measured data and uncertainty, not an illustrative curve.
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Performance Evaluation}
+\caption{Placeholder for measured throughput and API latency with run variability.}
+\label{fig:performance}
+\end{figure}
+
+\subsection{Event Processing Reliability}
+The Kafka experiment should issue a known sequence of committed business transitions and compare their identifiers with outbox rows, broker observations, and consumer effects. This permits losses, delays, and repeated deliveries to be distinguished. To test idempotency, replay selected event identifiers and verify that the consumer's business state changes at most once, while the processing log records the replay. Tests should cover duplicates both before and after a consumer restart. Any observed result must be tied to raw traces and a clearly defined observation period. \todo{Insert measured publication lag, processing lag, replay outcomes, and trace references.}
+
+\subsection{Fault Tolerance and Recovery}
+Fault injection should occur at controlled points: during a service request, after a local transaction commits but before outbox publication, and after a broker acknowledgement but before the relay records progress. Additional trials can pause a consumer or temporarily make its database unavailable. Each trial needs a pre-fault state, exact injection time, recovery action, and an invariant checked after recovery. For example, a committed booking should not disappear, and a repeated event should not create a second contract or bill. The team must distinguish a failed user request from a successfully committed local transaction whose downstream work is pending.
+
+Figure~\ref{fig:recovery} reserves space for a measured recovery timeline. The final report should include unsuccessful trials as well as successful ones and should avoid generalizing from a single restart. \todo{Run service-failure and outbox-recovery trials; insert measured times, counts, traces, and remaining inconsistencies.}
+
+\begin{figure}[t]
+\centering
+\figureplaceholder{Failure Recovery}
+\caption{Placeholder for measured fault, retry, and invariant-recovery timeline.}
+\label{fig:recovery}
+\end{figure}
+
+\input{tables/experiments}

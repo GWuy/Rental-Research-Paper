@@ -1,0 +1,17 @@
+% Owner: Hoang. All outcomes and measurements remain TODO until experiments are run.
+\begin{table*}[t]
+\caption{Experimental Scenarios and Required Evidence}
+\label{tab:experiments}
+\centering\footnotesize
+\begin{tabularx}{\textwidth}{@{}p{0.22\textwidth}X X@{}}
+\toprule
+Scenario & Procedure and controlled variable & Evidence to report \\
+\midrule
+API throughput and latency & Increase offered request rate with a fixed operation mix; repeat each load level & Achieved throughput, error rate, latency percentiles, run variation: TODO \\
+Kafka event processing & Commit a known sequence of changes; track corresponding publication and consumption & End-to-end lag, missing events, retries, trace IDs: TODO \\
+Duplicate event handling & Replay known identifiers before and after consumer restart & Number of business effects per identifier and deduplication records: TODO \\
+Service failure recovery & Stop a selected service during a defined workflow; restore it & Failed requests, pending work, invariant recovery time: TODO \\
+Transactional outbox recovery & Interrupt relay around commit, send, and acknowledgement points & Outbox state, repeated publications, eventual consumer effects: TODO \\
+\bottomrule
+\end{tabularx}
+\end{table*}
