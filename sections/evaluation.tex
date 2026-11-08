@@ -7,14 +7,7 @@ The system specification defines an observable rental workflow for evaluating cr
 Use a dedicated test deployment matching the specification's Docker Compose topology, with PostgreSQL, a single Kafka broker, the gateway, and the services needed by the rental workflow. Record the exact application revision, image versions, broker and database configuration, CPU and memory limits, and the location of the load generator. Use synthetic accounts with the required customer and staff roles, active listings, and eligible rental requests. Reserve an independent request identifier for each acceptance and restore equivalent fixture data before each repetition. Record the setup commands and fixture revision with each run. Use at least three independent repetitions per condition and report the individual outcomes together with aggregate statistics.
 
 \subsection{API Latency and Throughput}
-Test public listing reads and authenticated rental-request writes through the gateway. Measure each operation separately and keep the operation mix constant for a combined workload. Run a pilot to select a range of offered rates that includes both light load and a rate near saturation. Fix the warm-up, measurement window, and request timeout before collecting the reported runs. Use the same query distribution and equivalent starting data at each rate. Report the offered and successful request rates, the numbers of successes and failures, and the median, 95th percentile, and 99th percentile of successful response latency. Count timeouts in the failure denominator and report them separately from HTTP errors. Figure~\ref{fig:performance} is reserved for measured throughput and latency by operation and offered rate, with variation across repetitions.
-
-\begin{figure}[t]
-\centering
-\figureplaceholder{Performance Evaluation}
-\caption{Reserved for measured API throughput and latency across load levels.}
-\label{fig:performance}
-\end{figure}
+Test public listing reads and authenticated rental-request writes through the gateway. Measure each operation separately and keep the operation mix constant for a combined workload. Run a pilot to select a range of offered rates that includes both light load and a rate near saturation. Fix the warm-up, measurement window, and request timeout before collecting the reported runs. Use the same query distribution and equivalent starting data at each rate. Report the offered and successful request rates, the numbers of successes and failures, and the median, 95th percentile, and 99th percentile of successful response latency. Count timeouts in the failure denominator and report them separately from HTTP errors.
 
 \subsection{Event Delivery and Duplicate Handling}
 Accept a known batch of verified requests. Join the committed requests, outbox entries, broker records, and resulting draft contracts by rental request identifier and event identifier. Record the correlation identifier when it is available. Capture timestamps for acceptance commit, publication, and the consumer's committed business effect. When an exact commit timestamp is unavailable, document the observation used as a proxy and its resolution. Report commit-to-publication and commit-to-contract latency separately. Count accepted requests that remain unmatched when the observation window ends, and record pending outbox rows or dead-letter records so the reader can distinguish incomplete work from an observed processing error.
@@ -24,13 +17,6 @@ Replay the original Kafka envelope with the same \texttt{eventId} and key after 
 \subsection{Fault Tolerance and Recovery}
 Run the same workflow without injected faults to establish normal completion time. In the consumer outage trial, stop Contract and Tenant, accept a batch of verified requests, and confirm that the corresponding broker records arrive during the outage. Restart the consumer, record its readiness time, and observe the resulting contracts. In the publisher outage trial, interrupt the relay after acceptance commits and before publication. Confirm that the outbox row remains pending, then restore the relay and track publication and draft creation. If the test harness can reliably stop the relay after broker acknowledgement and before it records \texttt{published\_at}, exercise that window in a separate trial and count any repeated records and business effects.
 
-For each fault, record the injection, restore, and completion times. Report time from fault injection to restored consistency and time from restoration to backlog clearance. Recovery is complete when each committed acceptance in the batch has a corresponding published event and exactly one draft contract. Report the number still pending at the end of the observation window. Figure~\ref{fig:recovery} is reserved for the measured fault and recovery timeline. Table~\ref{tab:experiments} summarizes the evidence required by each trial.
-
-\begin{figure}[t]
-\centering
-\figureplaceholder{Failure Recovery}
-\caption{Reserved for fault, restart, and backlog clearance times from recovery trials.}
-\label{fig:recovery}
-\end{figure}
+For each fault, record the injection, restore, and completion times. Report time from fault injection to restored consistency and time from restoration to backlog clearance. Recovery is complete when each committed acceptance in the batch has a corresponding published event and exactly one draft contract. Report the number still pending at the end of the observation window. Table~\ref{tab:experiments} summarizes the planned experimental scenarios, procedures, and required evidence metrics.
 
 \input{tables/experiments}

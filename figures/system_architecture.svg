@@ -11,15 +11,20 @@
 <path d="M305 62L365 62" stroke="#233f55" stroke-width="2"  fill="none"/>
 <path d="M835 62L895 62" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <path d="M600 100L600 140" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
-<path d="M172 140L1030 140" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M172 140L1027 140" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <text x="600" y="130" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="middle">Configured service routes</text>
 <path d="M172 140L172 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <path d="M457 140L457 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <path d="M742 140L742 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <path d="M1027 140L1027 165" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
-<path d="M317 140L317 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
-<path d="M602 140L602 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
-<path d="M887 140L887 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M315 140L315 300" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M600 140L600 300" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M885 140L885 300" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M172 300L1027 300" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M172 300L172 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M457 300L457 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M742 300L742 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
+<path d="M1027 300L1027 310" stroke="#233f55" stroke-width="2" stroke-dasharray="7 5" fill="none"/>
 <rect x="35" y="165" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
 <text x="50" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Auth</text>
 <text x="50" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">auth_db</text>
@@ -28,26 +33,30 @@
 <text x="335" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">User + Notification</text>
 <text x="335" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">user_db</text>
 <text x="335" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
-<rect x="605" y="165" width="275" height="125" rx="6" fill="#fffaf1" stroke="#af7029" stroke-width="2" stroke-dasharray="9 6"/>
+<rect x="605" y="165" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
 <text x="620" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Property</text>
 <text x="620" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">property_db + PostGIS</text>
-<text x="620" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Gradle source | no Compose</text>
-<rect x="890" y="165" width="275" height="125" rx="6" fill="#f7f8fa" stroke="#7d8a99" stroke-width="2" stroke-dasharray="3 6"/>
+<text x="620" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="890" y="165" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
 <text x="905" y="201" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Listing + Booking</text>
 <text x="905" y="237" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">listing_db</text>
-<text x="905" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Historical binary only</text>
-<rect x="180" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
-<text x="195" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Contract + Tenant</text>
-<text x="195" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">contract_db</text>
-<text x="195" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | no Compose</text>
-<rect x="465" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
-<text x="480" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Billing + Utility</text>
-<text x="480" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">billing_db</text>
-<text x="480" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source | Flyway path mismatch</text>
-<rect x="750" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
-<text x="765" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Asset + Maintenance</text>
-<text x="765" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">asset_db</text>
-<text x="765" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<text x="905" y="270" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="35" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="50" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Contract + Tenant</text>
+<text x="50" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">contract_db</text>
+<text x="50" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="320" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="335" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Billing + Utility</text>
+<text x="335" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">billing_db</text>
+<text x="335" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="605" y="310" width="275" height="125" rx="6" fill="#ffffff" stroke="#233f55" stroke-width="2" />
+<text x="620" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Asset + Maintenance</text>
+<text x="620" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">asset_db</text>
+<text x="620" y="415" font-family="Arial,sans-serif" font-size="17" font-weight="400" fill="#45566a" text-anchor="start">Source + SQL | Compose</text>
+<rect x="890" y="310" width="275" height="125" rx="6" fill="#f4f7f9" stroke="#233f55" stroke-width="2" stroke-dasharray="6 4" />
+<text x="905" y="346" font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#172337" text-anchor="start">Chat Service</text>
+<text x="905" y="382" font-family="Arial,sans-serif" font-size="19" font-weight="700" fill="#233f55" text-anchor="start">chat_db</text>
+<text x="905" y="415" font-family="Arial,sans-serif" font-size="15" font-weight="400" fill="#45566a" text-anchor="start">Auxiliary | Source + SQL | Compose</text>
 <rect x="35" y="457" width="1130" height="33" rx="6" fill="#f3f6f8" stroke="#8292a2" stroke-width="2" />
-<text x="600" y="480" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#172337" text-anchor="middle">PostgreSQL: seven logical databases configured  |  PostGIS in property_db</text>
+<text x="600" y="480" font-family="Arial,sans-serif" font-size="18" font-weight="400" fill="#172337" text-anchor="middle">PostgreSQL 16: eight logical databases (seven domain + chat_db)  |  PostGIS in property_db</text>
 </svg>

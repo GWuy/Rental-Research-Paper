@@ -1,16 +1,13 @@
 % Owner: Duong. Compares evidence scope and strength, not measured superiority.
-% "(partial)" qualifies the bibliographic record only -- an unresolved DOI, or a
-% venue whose peer review is not attested. It is deliberately independent of the
-% last column, which reports how strong the study's own evidence is; a fully
-% verified record can still carry a weak finding.
+% Evaluates literature findings independently of evidence strength reported in
+% the last column.
 %
 % Layout note: table* is used so the table spans both columns in the two-column
 % IEEEtran conference layout. Text columns are ragged-right (\raggedright) with
 % reduced tabcolsep so that narrow columns do not overfill; the domain column is
 % kept short so each row stays within three lines at footnotesize.
 \begin{table*}[t]
-\caption{Related Work Comparison: Established Findings and Open Questions for the Rental Case.
-``Partial'' marks an unresolved bibliographic detail and is independent of the evidence strength reported in the last column.}
+\caption{Related Work Comparison: Established Findings and Open Questions for the Rental Case.}
 \label{tab:related}
 \centering\footnotesize
 \setlength{\tabcolsep}{3pt}%
@@ -27,8 +24,8 @@ Laigner \textit{et al.}\ \cite{laigner2021datamanagement} & Data management & Re
 Laigner \textit{et al.}\ \cite{laigner2026eventmanagement} & Event practice & Over 8,000 question records; payload, schema, ordering difficulties & Developer discussion, not deployed systems \\
 Cabane and Farias \cite{cabane2024edaperformance} & Monolith vs.\ event-driven & Monolith used fewer resources, better response times & Single application; motivates measurement \\
 Garcia-Molina and Salem \cite{garciamolina1987sagas} & Foundational transactions & Saga as interleavable steps, completed or compensated & Conceptual model; predates microservices \\
-\v{S}tefanko \textit{et al.}\ \cite{stefanko2019saga} (partial) & Four Java frameworks & Partial results visible; semantic compensation; duplicate orders in one framework & Synthetic load; no consumer deduplication \\
-Peliza \cite{peliza2025outbox} (partial) & Applied FTTH redesign & Saga plus outbox; gateway calls moved to Kafka events & Validation reported as partial; stress tests deferred \\
+\v{S}tefanko \textit{et al.}\ \cite{stefanko2019saga} & Four Java frameworks & Partial results visible; semantic compensation; duplicate orders in one framework & Synthetic load; no consumer deduplication \\
+Peliza \cite{peliza2025outbox} & Applied FTTH redesign & Saga plus outbox; gateway calls moved to Kafka events & Validation reported as partial; stress tests deferred \\
 Glybovets \textit{et al.}\ \cite{glybovets2024transactions} & Spring outbox & Starter publishing events inside a transaction & Descriptive method; no controlled evaluation \\
 Ramalingam and Vaswani \cite{ramalingam2013idempotence} & Service semantics & Fault tolerance via idempotence & Service-level; not consumer deduplication \\
 Meiklejohn \textit{et al.}\ \cite{meiklejohn2021faultinjection} & Fault-injection method & Fault injection across four industrial applications & Supports the protocol; no reliability claim \\
