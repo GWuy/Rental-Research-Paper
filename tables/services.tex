@@ -1,22 +1,21 @@
-% Owner: Huy. "Present" means repository artifacts, not a verified running service.
-% Evidence: specification sections 3 and 9; backend parent pom, service source,
-% migrations, and infra/docker-compose.yml at revision bb74d81.
+% Owner: Huy. Source audit of the backend path supplied for this revision;
+% presence does not imply successful build or runtime integration.
 \begin{table*}[t]
-\caption{Specified Business Services, Data Ownership, and Source Audit}
+\caption{Specified Business Services and Status in the Inspected Backend Snapshot}
 \label{tab:services}
 \centering\footnotesize
 \begin{tabularx}{\textwidth}{@{}p{0.17\textwidth}p{0.16\textwidth}X X@{}}
 \toprule
 Business service & Logical database & Specified responsibility & Repository evidence and integration status \\
 \midrule
-Auth & \texttt{auth\_db} & Accounts, roles, access and refresh tokens & Controllers, security code, and migrations present; declared in Compose. \\
-User and Notification & \texttt{user\_db} & Profiles, staff-building assignments, notifications & Controllers, assignment lookup, and migrations present; declared in Compose; loopback port binding present. \\
-Property & \texttt{property\_db} & Buildings, rooms, prices, spatial search & Controllers, spatial search, and migrations integrated in parent Maven build; declared in Compose; runtime verification pending. \\
-Listing and Booking & \texttt{listing\_db} & Listings, rental requests, viewings, roommate applications & Controllers, entities, outbox relay, and migrations present in parent Maven build; declared in Compose; runtime verification pending. \\
-Contract and Tenant & \texttt{contract\_db} & Contracts, tenants, move-out requests & Controllers, role and building checks, outbox publisher, and migrations present; declared in Compose; requires host pre-compiled JAR. \\
-Billing and Utility & \texttt{billing\_db} & Meters, readings, invoices, payments & Controllers, SQL migrations (path corrected to \texttt{db/migration}), and outbox relay present; declared in Compose. \\
-Asset and Maintenance & \texttt{asset\_db} & Appliances, fault reports, work and schedules & Controllers, role and building checks, and migration present; declared in Compose. \\
+Auth & \texttt{auth\_db} & Accounts, roles, access and refresh tokens & Parent Maven module and Compose service; runtime unverified. \\
+User and Notification & \texttt{user\_db} & Profiles, staff-building assignments, notifications & Parent module and Compose service; host loopback binding. \\
+Property & \texttt{property\_db} & Buildings, rooms, prices, spatial search & Parent \texttt{property-service} module has migrations and an entry point; fuller source is in separate \texttt{properties-service}; no Compose service. \\
+Listing and Booking & \texttt{listing\_db} & Listings, rental requests, viewings, roommate applications & Gateway route and database name configured; no source module in parent Maven build or Compose service. \\
+Contract and Tenant & \texttt{contract\_db} & Contracts, tenants, move-out requests & Parent module includes controllers and Kafka consumer; no Compose service. \\
+Billing and Utility & \texttt{billing\_db} & Meters, readings, invoices, payments & Parent module includes migrations and outbox code; no Compose service. \\
+Asset and Maintenance & \texttt{asset\_db} & Appliances, fault reports, work and schedules & Parent module and Compose service; runtime unverified. \\
 \bottomrule
 \end{tabularx}
-\smallskip\par\raggedright\textit{Note:} Table covers the seven core rental domain services defined in specification v0.2. An auxiliary Chat Service (\texttt{chat\_db}, port 8088) is additionally declared in Compose for tenant-manager messaging but is excluded from the core domain decomposition. Compose declarations do not demonstrate multi-container runtime execution.
+\smallskip\par\raggedright\textit{Note:} The target has seven core services. The inspected Compose file declares three business-service containers. Neither the parent build nor Compose declares an auxiliary Chat Service. Source and configuration presence do not establish successful runtime execution.
 \end{table*}

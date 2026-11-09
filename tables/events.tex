@@ -1,7 +1,7 @@
-% Owner: Duy. Verified from source code: topic constants in each publisher, @KafkaListener
-% annotations, and the kafka-init container in infra/docker-compose.yml (3 partitions, RF=1 for dev).
+% Owner: Duy. Topic names are configured in kafka-init; event types and intended
+% publisher/consumer relationships come from specification v0.2 unless noted.
 \begin{table*}[t]
-\caption{Verified Event Topics, Publishers, and Consumers}
+\caption{Configured Topics and Specified Publisher--Consumer Relationships}
 \label{tab:events}
 \centering\footnotesize
 \setlength{\tabcolsep}{3.5pt}%
@@ -20,4 +20,5 @@ Topic & Publisher (owner) & Event types & Consumers (group id) \\
 \texttt{asset.events} & Asset and Maintenance Service & \texttt{ReportCreated}, \texttt{ReportRejected}, \texttt{MaintenanceRequestAssigned}, \texttt{MaintenanceCompleted}, \texttt{MaintenanceScheduleDue} & User and Notification \\
 \bottomrule
 \end{tabularx}
+\smallskip\par\raggedright\textit{Note:} Kafka init configures these six topics, but the supplied parent build and Compose file do not include the Listing and Booking publisher. The remaining event-type rows describe the target design, not observed end-to-end delivery.
 \end{table*}

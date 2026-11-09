@@ -8,10 +8,11 @@
 Scenario & Procedure & Evidence to report \\
 \midrule
 API throughput and latency & Increase the offered request rate and repeat each level using equivalent fixtures & Successful requests per second, error and timeout counts, p50, p95, and p99 latency \\
+Boundary and authorization audit & Inventory tables, credentials, APIs and events; test ownership and direct-access cases & Cross-database writes, effective grants, authorized and rejected cases by actor and building \\
 Kafka event processing & Accept a known batch and trace each request from commit to draft creation & Publication and completion latency, matched requests, and requests pending at cutoff \\
-Duplicate event handling & Replay the same envelope after the original commit and again after consumer restart & Observed replays, processed-event records, and contract count per request \\
+Duplicate event handling & Replay the same envelope after the original commit and consumer restart; test the retained internal draft endpoint & Observed replays, processed-event records, draft fields and count per request \\
 Consumer recovery & Accept requests while Contract and Tenant is stopped, then restart it & Events published during outage, backlog clearance time, and final contract count \\
-Outbox recovery & Interrupt publication after commit and, when controllable, after broker acknowledgement & Pending outbox rows, repeated publications, recovery time, and final contract count \\
+Outbox recovery & Interrupt publication after commit and at an instrumented post-acknowledgement failpoint & Pending outbox rows, repeated publications, recovery time, and final draft count; report untested failpoints \\
 \bottomrule
 \end{tabularx}
 \end{table*}
